@@ -84,7 +84,7 @@
     height:calc(100vh - 65px);
     min-height:520px;
     width:100%;
-    background-image:url('images/hero.jpg');
+    background-image:url('/RM-AROMAS-DEL-HOGAR/images/hero.jpg');
     background-size:cover;
     background-position:center 35%;
     display:flex;
