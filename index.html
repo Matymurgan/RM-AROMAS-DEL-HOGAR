@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RM · Aromas para el Hogar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#c9a066;
+    --gold-deep:#b7894c;
+    --sage:#8fa888;
+    --sage-deep:#71906b;
+    --cream:#f7f3ec;
+    --cream-2:#efe9dd;
+    --ink:#4a4640;
+    --ink-soft:#7a746a;
+    --line:#e2dbcb;
+    --white:#fffdf9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    color:var(--ink);
+  }
+  a{text-decoration:none; color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:.68rem;
+    color:var(--sage-deep);
+    font-weight:500;
+  }
+
+  /* ---------- SMOKE DIVIDER (signature element) ---------- */
+  .smoke-divider{width:100%; display:block; height:34px; margin:0 auto;}
+  .smoke-divider path{
+    fill:none; stroke:var(--sage); stroke-width:1.6; stroke-linecap:round;
+    stroke-dasharray:600; stroke-dashoffset:600;
+    animation:draw 2.4s ease forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(247,243,236,.95);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 28px; max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:44px; width:auto;}
+  nav.links{display:flex; gap:32px; align-items:center;}
+  nav.links a{font-size:.85rem; letter-spacing:.03em; color:var(--ink); position:relative; padding:4px 0;}
+  nav.links a:not(.wa-btn)::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--sage-deep);
+    transition:width .3s ease;
+  }
+  nav.links a:not(.wa-btn):hover::after{width:100%;}
+  .wa-btn{
+    display:flex; align-items:center; gap:8px;
+    background:var(--sage-deep); color:var(--white)!important;
+    padding:10px 20px; border-radius:30px; font-size:.82rem; letter-spacing:.02em;
+    transition:background .25s ease, transform .25s ease;
+    white-space:nowrap;
+  }
+  .wa-btn:hover{background:#5f7a5a; transform:translateY(-1px);}
+  .wa-btn svg{width:16px; height:16px; fill:var(--white);}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:24px; height:1.5px; background:var(--ink);}
+
+  /* ---------- HERO — PANTALLA COMPLETA ---------- */
+  .hero-full{
+    position:relative;
+    height:calc(100vh - 65px);
+    min-height:520px;
+    width:100%;
+    background-image:url('images/hero.jpg');
+    background-size:cover;
+    background-position:center 35%;
+    display:flex;
+    align-items:flex-end;
+  }
+  .hero-full::before{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(38,34,28,0) 35%, rgba(30,27,22,.82) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    max-width:1180px; margin:0 auto; width:100%;
+    padding:0 28px 84px;
+    color:var(--white);
+  }
+  .hero-content .eyebrow{color:#e6dbc2; margin-bottom:16px; display:inline-block;}
+  .hero-content h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    line-height:1.04;
+    margin-bottom:20px;
+    font-style:italic;
+    color:var(--white);
+  }
+  .hero-content h1 em{color:var(--gold); font-style:italic;}
+  .hero-content p{
+    font-size:1.02rem; color:#efe9dccc; max-width:460px; margin-bottom:32px; line-height:1.7;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--white); color:var(--ink); padding:16px 32px; border-radius:2px;
+    font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;
+    transition:all .25s ease;
+    border:1px solid var(--white);
+  }
+  .btn-primary:hover{background:transparent; color:var(--white);}
+  .btn-ghost{
+    padding:16px 32px; border-radius:2px; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.55); color:var(--white);
+    transition:all .25s ease;
+  }
+  .btn-ghost:hover{border-color:var(--white); background:rgba(255,255,255,.1);}
+  .scroll-cue{
+    position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:2;
+    width:20px; height:32px; border:1px solid rgba(255,255,255,.6); border-radius:12px;
+  }
+  .scroll-cue::after{
+    content:''; position:absolute; top:6px; left:50%; width:3px; height:6px; margin-left:-1.5px;
+    background:#fff; border-radius:2px; animation:cue 1.8s ease infinite;
+  }
+  @keyframes cue{0%{opacity:1; transform:translateY(0);} 70%{opacity:0; transform:translateY(10px);} 100%{opacity:0;}}
+
+  /* ---------- STRIP ---------- */
+  .strip{
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+  }
+  .strip .wrap{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    padding:26px 28px;
+  }
+  .strip-item{display:flex; align-items:center; gap:14px; justify-content:center; text-align:left;}
+  .strip-item svg{width:26px; height:26px; flex-shrink:0; stroke:var(--sage-deep);}
+  .strip-item .t{font-size:.92rem; color:var(--ink); font-weight:500;}
+  .strip-item .d{font-size:.76rem; color:var(--ink-soft);}
+
+  /* ---------- CATEGORY QUICK NAV ---------- */
+  .catnav{
+    max-width:1180px; margin:44px auto 0; padding:0 28px;
+    display:flex; gap:12px; overflow-x:auto; scrollbar-width:none;
+    padding-bottom:6px;
+  }
+  .catnav::-webkit-scrollbar{display:none;}
+  .catnav a{
+    flex-shrink:0; font-size:.78rem; letter-spacing:.05em; padding:9px 18px;
+    border:1px solid var(--line); border-radius:30px; color:var(--ink-soft);
+    transition:all .25s ease; white-space:nowrap;
+  }
+  .catnav a:hover{border-color:var(--sage-deep); color:var(--sage-deep); background:var(--white);}
+
+  /* ---------- CATALOGO ---------- */
+  #catalogo{padding-top:30px;}
+  .category{padding:76px 0; scroll-margin-top:80px;}
+  .category:nth-child(even){background:var(--cream-2);}
+  .cat-head{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:52px; align-items:center;
+    margin-bottom:52px;
+  }
+  .cat-head.reverse{grid-template-columns:1.15fr .85fr;}
+  .cat-head.reverse .cat-photo{order:2;}
+  .cat-photo{border-radius:4px; overflow:hidden; box-shadow:0 20px 45px -18px rgba(74,70,64,.3);}
+  .cat-photo img{width:100%; height:100%; object-fit:cover; aspect-ratio:4/3;}
+  .cat-icon-box{
+    width:100%; aspect-ratio:4/3; border-radius:4px; background:var(--white);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cat-icon-box svg{width:38%; height:38%; stroke:var(--gold-deep); fill:none;}
+  .cat-info .num{font-family:'Cormorant Garamond',serif; font-size:.85rem; color:var(--sage-deep); letter-spacing:.1em;}
+  .cat-info h2{font-size:2.3rem; margin:8px 0 16px; font-style:italic;}
+  .cat-info p{color:var(--ink-soft); line-height:1.75; font-size:.96rem; max-width:460px;}
+
+  .prod-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:22px;
+  }
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:3px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 18px 34px -18px rgba(74,70,64,.28); border-color:var(--sage);}
+  .card-media{
+    aspect-ratio:1/1; width:100%; background:var(--cream-2);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .card-media img{width:100%; height:100%; object-fit:cover;}
+  .card-media svg{width:32%; height:32%; stroke:var(--gold-deep); fill:none;}
+  .card-body{padding:20px 22px 22px; display:flex; flex-direction:column; gap:12px; flex-grow:1;}
+  .card h3{font-size:1.2rem; font-weight:600; font-style:normal; font-family:'Cormorant Garamond',serif;}
+  .card p{font-size:.83rem; color:var(--ink-soft); line-height:1.6; flex-grow:1;}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:4px; gap:10px;}
+  .price{font-size:.95rem; color:var(--gold-deep); font-weight:500; font-family:'Cormorant Garamond',serif;}
+  .price-tag{font-size:1.2rem;}
+  .ask-btn{
+    display:flex; align-items:center; gap:6px;
+    font-size:.7rem; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--sage-deep); border:1px solid var(--sage); padding:8px 14px; border-radius:30px;
+    transition:all .25s ease; flex-shrink:0;
+  }
+  .ask-btn:hover{background:var(--sage-deep); color:var(--white); border-color:var(--sage-deep);}
+  .ask-btn svg{width:12px; height:12px; fill:currentColor;}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background:var(--ink); color:var(--white);
+    padding:70px 0; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-banner h2{color:var(--white); font-size:2.2rem; font-style:italic; margin-bottom:14px;}
+  .cta-banner p{color:#cfc8ba; margin-bottom:30px; font-size:.95rem;}
+  .cta-banner .wa-btn{display:inline-flex; padding:15px 32px; font-size:.88rem;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{background:var(--cream-2); padding-top:70px;}
+  .foot-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px;
+    padding-bottom:50px; border-bottom:1px solid var(--line);
+  }
+  .foot-brand img{height:52px; margin-bottom:14px;}
+  .foot-brand p{color:var(--ink-soft); font-size:.85rem; line-height:1.7; max-width:280px;}
+  .foot-col h4{font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; color:var(--sage-deep); margin-bottom:16px;}
+  .foot-col a, .foot-col p{display:block; font-size:.88rem; color:var(--ink); margin-bottom:10px;}
+  .foot-col a:hover{color:var(--sage-deep);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 0; font-size:.75rem; color:var(--ink-soft); flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-wa{
+    position:fixed; bottom:26px; right:26px; z-index:200;
+    width:58px; height:58px; border-radius:50%; background:#5f9067;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px -6px rgba(0,0,0,.35);
+    transition:transform .25s ease;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+  .float-wa svg{width:28px; height:28px; fill:var(--white);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav.links{
+      position:fixed; top:64px; left:0; right:0; background:var(--white);
+      flex-direction:column; padding:24px 28px; gap:20px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-130%); transition:transform .3s ease; opacity:0;
+    }
+    nav.links.open{transform:translateY(0); opacity:1;}
+    .burger{display:flex;}
+    .hero-full{height:88vh;}
+    .hero-content{padding-bottom:56px;}
+    .hero-ctas{flex-direction:column; align-items:stretch;}
+    .strip .wrap{grid-template-columns:1fr; text-align:center;}
+    .strip-item{justify-content:center;}
+    .cat-head, .cat-head.reverse{grid-template-columns:1fr;}
+    .cat-head.reverse .cat-photo{order:0;}
+    .foot-grid{grid-template-columns:1fr; gap:36px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .smoke-divider path{animation:none; stroke-dashoffset:0;}
+    .scroll-cue::after{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav">
+    <a href="#" class="brand">
+      <img src="images/logo.png" alt="RM Aromas para el Hogar">
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <nav class="links" id="navLinks">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#contacto">Contacto</a>
+      <a class="wa-btn" id="navWaBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.4-8.5 8.4z"/></svg>
+        WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO — PANTALLA COMPLETA ============ -->
+<section class="hero-full">
+  <div class="hero-content">
+    <span class="eyebrow">RM · Aromas para el Hogar</span>
+    <h1>Descubrí tu<br><em>aroma ideal.</em></h1>
+    <p>Sahumerios, velas, difusores y aromatizantes seleccionados para acompañar cada rincón de tu hogar. Catálogo completo y pedidos directo por WhatsApp.</p>
+    <div class="hero-ctas">
+      <a href="#catalogo" class="btn-primary">Ver catálogo completo</a>
+      <a href="#" class="btn-ghost hero-wa-link" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+
+<svg class="smoke-divider" viewBox="0 0 1180 34" preserveAspectRatio="none">
+  <path d="M0 20 C 150 0, 250 34, 400 17 S 650 0, 800 18 S 1050 30, 1180 12"/>
+</svg>
+
+<!-- ============ STRIP ============ -->
+<section class="strip">
+  <div class="wrap">
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 2C7 8 4 11 4 15a8 8 0 0016 0c0-4-3-7-8-13z"/></svg>
+      <div><div class="t">Fragancias originales</div><div class="d">Aromanza, Saphirus y Shiny</div></div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M3 12l3-8h12l3 8M3 12v7a1 1 0 001 1h16a1 1 0 001-1v-7M3 12h18"/></svg>
+      <div><div class="t">Catálogo completo</div><div class="d">Todas las categorías en un solo lugar</div></div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.5-.2-.6 0-.8.3-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.6-2.9-1.7-4-3.4-.1-.3 0-.4.1-.6l.4-.5c.1-.2.1-.3 0-.5C10.5 9.6 10 8.3 9.8 7.8c-.2-.4-.4-.4-.6-.4h-.5c-.5 0-1 .3-1.3.7-1.5 1.7-.9 3.9.4 5.7 1.8 2.6 3.7 4 6.6 5 .9.3 1.7.3 2.3.2.7-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.1-1.3-.1-.1-.3-.2-.6-.2z"/><circle cx="12" cy="12" r="10"/></svg>
+      <div><div class="t">Pedidos por WhatsApp</div><div class="d">Consultá stock y coordiná tu envío</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY QUICK NAV ============ -->
+<nav class="catnav" id="categorias">
+  <a href="#cat-sahumerios">Sahumerios</a>
+  <a href="#cat-velas">Velas</a>
+  <a href="#cat-difusores">Difusores</a>
+  <a href="#cat-sprays">Sprays & Aromatizantes</a>
+  <a href="#cat-limpieza">Limpieza Shiny</a>
+</nav>
+
+<!-- ============ CATALOGO ============ -->
+<main id="catalogo"></main>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="cta-banner">
+  <div class="wrap">
+    <h2>¿No encontrás lo que buscás?</h2>
+    <p>Escribinos y te ayudamos a elegir el aroma ideal para tu hogar.</p>
+    <a href="#" class="wa-btn cta-wa-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.4-8.5 8.4z"/></svg>
+      Escribinos por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="images/logo.png" alt="RM Aromas para el Hogar">
+        <p>Aromas para el hogar: sahumerios, velas, difusores y aromatizantes para cada ambiente. Pedidos y consultas directo por WhatsApp.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="#" class="foot-wa-link" target="_blank" rel="noopener">WhatsApp: +54 9 11 6498-5550</a>
+        <p>Instagram: @rm.aromas</p>
+        <p>Buenos Aires, Argentina</p>
+      </div>
+      <div class="foot-col">
+        <h4>Categorías</h4>
+        <a href="#cat-sahumerios">Sahumerios</a>
+        <a href="#cat-velas">Velas</a>
+        <a href="#cat-difusores">Difusores</a>
+        <a href="#cat-sprays">Sprays & Aromatizantes</a>
+        <a href="#cat-limpieza">Limpieza Shiny</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 RM · Aromas para el Hogar</span>
+      <span>Sitio de catálogo — pedidos por WhatsApp</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="float-wa" id="floatWa" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.4-8.5 8.4z"/></svg>
+</a>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN — EDITÁ ACÁ TUS DATOS
+   ========================================================= */
+
+// 1) Tu número de WhatsApp con código de país (54) + 9 + código de área + número.
+const WHATSAPP_NUMBER = "5491164985550";
+
+// 2) Categorías y productos.
+//    foto: dejalo en null para mostrar un ícono, o poné la ruta de una imagen
+//    (ej: "images/sahumerio-lavanda.jpg") una vez que la subas a la carpeta /images.
+//    precio: "Consultar"  -> se muestra "Consultar precio"
+//    precio: "$5.500"     -> se muestra ese precio fijo
+const CATEGORIES = [
+  {
+    id: "cat-sahumerios",
+    num: "01",
+    titulo: "Sahumerios & Accesorios",
+    texto: "Varillas Aromanza en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios, conitos y cascadas de humo.",
+    foto: "images/sahumerios.jpg",
+    icon: "incienso",
+    reverse: false,
+    productos: [
+      { nombre: "Sahumerios Aromanza x20", desc: "Varillas largas, amplia variedad de fragancias.", precio: "Consultar", icon: "incienso", foto: null },
+      { nombre: "Porta Sahumerios", desc: "Base en cerámica o madera, distintos diseños.", precio: "Consultar", icon: "base", foto: null },
+      { nombre: "Conitos Aromáticos", desc: "Caja surtida, combustión lenta y pareja.", precio: "Consultar", icon: "cono", foto: null },
+      { nombre: "Cascadas de Humo (Backflow)", desc: "Efecto cascada, incluye cono especial.", precio: "Consultar", icon: "cascada", foto: null }
+    ]
+  },
+  {
+    id: "cat-velas",
+    num: "02",
+    titulo: "Velas Aromáticas",
+    texto: "Velas perfumadas para cada ambiente, acompañadas de porta velas para lucirlas en cualquier rincón de la casa.",
+    foto: "images/velas.jpg",
+    icon: "vela",
+    reverse: true,
+    productos: [
+      { nombre: "Vela Aromática Chica", desc: "Ideal para baños y espacios pequeños.", precio: "Consultar", icon: "vela", foto: null },
+      { nombre: "Vela Aromática Grande", desc: "Mayor duración, fragancia envolvente.", precio: "Consultar", icon: "vela", foto: null },
+      { nombre: "Porta Velas", desc: "Diseños en vidrio y cerámica.", precio: "Consultar", icon: "base", foto: null }
+    ]
+  },
+  {
+    id: "cat-difusores",
+    num: "03",
+    titulo: "Difusores & Dispersores",
+    texto: "Difusores de varillas con esencia concentrada y aparatos eléctricos para dispersar aroma de forma continua.",
+    foto: "images/difusores.jpg",
+    icon: "difusor",
+    reverse: false,
+    productos: [
+      { nombre: "Difusor de Varillas", desc: "Frasco de vidrio + varillas de ratán, aroma constante.", precio: "Consultar", icon: "difusor", foto: null },
+      { nombre: "Aparato Difusor Eléctrico", desc: "Dispersor ultrasónico para ambientar sin llama.", precio: "Consultar", icon: "enchufe", foto: null }
+    ]
+  },
+  {
+    id: "cat-sprays",
+    num: "04",
+    titulo: "Sprays & Aromatizantes",
+    texto: "Aerosoles Saphirus para ambientes, textiles y auto: perfumá cortinas, sommiers, el interior del auto y más.",
+    foto: "images/aromatizantes.jpg",
+    icon: "spray",
+    reverse: true,
+    productos: [
+      { nombre: "Aerosol / Room Spray Saphirus", desc: "Para ambientar cualquier habitación al instante.", precio: "Consultar", icon: "spray", foto: null },
+      { nombre: "Aromatizante para Auto", desc: "Larga duración, distintas fragancias.", precio: "Consultar", icon: "auto", foto: null },
+      { nombre: "Aromatizante Textil Saphirus", desc: "Para cortinas, sommiers, sábanas y ropa.", precio: "Consultar", icon: "textil", foto: null }
+    ]
+  },
+  {
+    id: "cat-limpieza",
+    num: "05",
+    titulo: "Línea Limpieza Shiny",
+    texto: "Líquidos concentrados de limpieza Shiny, rendidores y perfumados, para dejar tu hogar impecable.",
+    foto: null,
+    icon: "botella",
+    reverse: false,
+    productos: [
+      { nombre: "Concentrado Multiuso Shiny", desc: "Alto rendimiento, diluible según uso.", precio: "Consultar", icon: "botella", foto: null },
+      { nombre: "Concentrado para Pisos Shiny", desc: "Perfuma y limpia en profundidad.", precio: "Consultar", icon: "botella", foto: null }
+    ]
+  }
+];
+
+const ICONS = {
+  incienso: '<path d="M8 21h8M9 21c0-5 1-6 1-9M15 21c0-5-1-6-1-9M10 12c-1-3 0-5 2-8 2 3 3 5 2 8"/>',
+  base: '<path d="M4 19h16M6 19l1-4h10l1 4M9 15V9a3 3 0 016 0v6"/>',
+  cono: '<path d="M12 3l4 15H8l4-15z"/><path d="M6 21h12"/>',
+  cascada: '<path d="M12 2c2 3 1 4-1 6s-3 3-1 6 1 4-1 6"/><path d="M4 21h16"/>',
+  vela: '<path d="M9 21V10a3 3 0 016 0v11"/><path d="M6 21h12"/><path d="M12 7c1-1 1-2 0-4-1 2-1 3 0 4z"/>',
+  difusor: '<path d="M8 21h8M9 21l-1-9a2 2 0 012-2h4a2 2 0 012 2l-1 9"/><path d="M10 10V6a2 2 0 014 0v4"/><path d="M9 3l3 2 3-2"/>',
+  enchufe: '<rect x="7" y="3" width="10" height="14" rx="2"/><path d="M10 7v3M14 7v3M12 17v4M9 21h6"/>',
+  spray: '<path d="M9 21V9a2 2 0 012-2h2a2 2 0 012 2v12"/><path d="M8 21h8"/><path d="M11 7V4h2v3"/><path d="M15 5l3-1M15 7l3 1M15 3l3-2"/>',
+  auto: '<path d="M4 16l1.5-5A2 2 0 017.4 9.5h9.2A2 2 0 0118.5 11L20 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r="1"/><circle cx="16.5" cy="18" r="1"/>',
+  textil: '<path d="M8 4l-4 2 2 3h2v11h8V9h2l2-3-4-2c0 1.5-1.3 2.5-4 2.5S8 5.5 8 4z"/>',
+  botella: '<path d="M10 2h4v3l2 2v13a2 2 0 01-2 2h-4a2 2 0 01-2-2V7l2-2V2z"/><path d="M9 12h6"/>'
+};
+
+/* ================== RENDER ================== */
+function waLink(mensaje){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+}
+
+function mediaBlock(foto, icon, alt){
+  if (foto){
+    return `<div class="card-media"><img src="${foto}" alt="${alt}" loading="lazy"></div>`;
+  }
+  return `<div class="card-media"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon] || ICONS.base}</svg></div>`;
+}
+
+function render(){
+  const main = document.getElementById('catalogo');
+  main.innerHTML = CATEGORIES.map(cat => {
+    const fotoBlock = cat.foto
+      ? `<div class="cat-photo"><img src="${cat.foto}" alt="${cat.titulo}" loading="lazy"></div>`
+      : `<div class="cat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat.icon]}</svg></div>`;
+
+    const cards = cat.productos.map(p => `
+      <div class="card">
+        ${mediaBlock(p.foto, p.icon, p.nombre)}
+        <div class="card-body">
+          <h3>${p.nombre}</h3>
+          <p>${p.desc}</p>
+          <div class="card-foot">
+            <span class="price">${p.precio === 'Consultar' ? 'Consultar precio' : `<span class="price-tag">${p.precio}</span>`}</span>
+            <a class="ask-btn" target="_blank" rel="noopener" href="${waLink('Hola! Quiero consultar por: ' + p.nombre)}">
+              Pedir
+              <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.4-8.5 8.4z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <section class="category" id="${cat.id}">
+        <div class="wrap">
+          <div class="cat-head ${cat.reverse ? 'reverse' : ''}">
+            ${fotoBlock}
+            <div class="cat-info">
+              <span class="num serif">${cat.num}</span>
+              <h2>${cat.titulo}</h2>
+              <p>${cat.texto}</p>
+            </div>
+          </div>
+          <div class="prod-grid">${cards}</div>
+        </div>
+      </section>
+    `;
+  }).join('');
+
+  const genericLink = waLink('Hola! Quiero consultar el catálogo de RM Aromas para el Hogar.');
+  document.querySelectorAll('#navWaBtn, .hero-wa-link, .cta-wa-link, .foot-wa-link, #floatWa').forEach(el => {
+    el.href = genericLink;
+  });
+}
+render();
+
+/* ================== MOBILE MENU ================== */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+</body>
+</html>
