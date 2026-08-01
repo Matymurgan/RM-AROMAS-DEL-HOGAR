@@ -94,7 +94,7 @@
     width:100%;
     background-image:url('../images/hero.jpg');
     background-size:cover;
-    background-position:center 35%;
+    background-position:center 42%;
     display:flex;
     align-items:flex-end;
   }
@@ -336,10 +336,6 @@
   }
   .cart-summary{font-size:.8rem; color:var(--ink-soft); text-align:center;}
   .cart-send-wa{justify-content:center; width:100%; padding:14px 20px;}
-  .cart-send-mail{
-    text-align:center; font-size:.78rem; color:var(--ink-soft); text-decoration:underline;
-    padding:4px 0;
-  }
   .cart-clear{
     background:none; border:none; font-size:.75rem; color:var(--ink-soft);
     text-decoration:underline; cursor:pointer; text-align:center; padding:2px 0;
