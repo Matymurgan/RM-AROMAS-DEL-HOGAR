@@ -5,6 +5,9 @@
 // Tu número de WhatsApp con código de país (54) + 9 + código de área + número.
 const WHATSAPP_NUMBER = "5491164985550";
 
+// Info de envíos que se muestra en el panel de pedido y se agrega al mensaje de WhatsApp.
+const SHIPPING_INFO = "Envío gratis a CABA y GBA en compras superiores a $50.000. Por debajo de ese monto, se coordina un punto de entrega.";
+
 /* =========================================================
    CATÁLOGO — Categoría → Subgrupo → Aromas/ítems.
    - foto/icon: foto en null = usa el ícono.
@@ -66,7 +69,7 @@ const CATEGORIES = [
       {
         nombre: "Porta Sahumerios",
         desc: "Elegí el material.",
-        foto: null,
+        foto: "images/porta-sahumerios-generico.jpg",
         icon: "base",
         precio: "Consultar",
         items: [
@@ -158,28 +161,28 @@ const CATEGORIES = [
         ]
       },
       {
-        nombre: "Difusor a Pilas (para Aerosol)",
-        desc: "Aparato dispersor a pilas para aromatizante en aerosol.",
-        foto: null,
+        nombre: "Difusor Analógico (para Aerosol)",
+        desc: "Aparato dispersor automático, funciona con las latas de aerosol para ambiente.",
+        foto: "images/difusor-analogico.jpg",
         icon: "enchufe",
         precio: "$15.000 – $20.000",
         items: [ { nombre: "Modelo único" } ]
       },
       {
         nombre: "Difusor de Aromas Touch (Kit Completo)",
-        desc: "Kit completo listo para usar.",
-        foto: null,
+        desc: "Kit completo listo para usar: aparato + repuesto.",
+        foto: "images/saphirus-touch-kit.jpg",
         icon: "enchufe",
         precio: "$5.000",
-        items: [ { nombre: "Kit completo" } ]
+        items: [ { nombre: "Agua Marina" } ]
       },
       {
         nombre: "Repuesto Difusor Touch",
         desc: "Repuesto para el difusor touch.",
-        foto: null,
+        foto: "images/saphirus-touch-repuesto.jpg",
         icon: "enchufe",
         precio: "$3.500",
-        items: [ { nombre: "Repuesto" } ]
+        items: [ { nombre: "Agua Marina" } ]
       }
     ]
   },
@@ -211,10 +214,10 @@ const CATEGORIES = [
       {
         nombre: "Aerosol Ambiente Saphirus",
         desc: "Para ambientar cualquier habitación al instante.",
-        foto: "images/aromatizantes.jpg",
+        foto: "images/saphirus-aerosol.jpg",
         icon: "spray",
         precio: "$6.000",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
+        items: [ { nombre: "Blue" }, { nombre: "One Million" }, { nombre: "Maracuyá" } ]
       },
       {
         nombre: "Aerosol Ambiente Aromanza",
@@ -298,6 +301,16 @@ function itemId(catTitulo, subNombre, itemNombre){
 function effectivePrice(item, sub){
   return item.precio || sub.precio || 'Consultar';
 }
+function parsePriceNumber(precioStr){
+  // Devuelve un número si el precio es fijo y único (ej: "$4.500" -> 4500).
+  // Devuelve null si es "Consultar" o un rango (ej: "$15.000 – $20.000").
+  if (!precioStr || precioStr === 'Consultar' || /[–-]/.test(precioStr)) return null;
+  const digits = precioStr.replace(/[^0-9]/g, '');
+  return digits ? parseInt(digits, 10) : null;
+}
+function formatARS(n){
+  return '$' + n.toLocaleString('es-AR');
+}
 function saveCart(){
   try { localStorage.setItem('rm_cart', JSON.stringify(cart)); } catch(e) {}
 }
@@ -353,9 +366,25 @@ function updateCartBadge(){
   setTimeout(() => badge.classList.remove('bump'), 200);
 }
 
+function cartSubtotal(){
+  let total = 0;
+  let sinPrecio = 0;
+  Object.values(cart).forEach(it => {
+    const n = parsePriceNumber(it.precio);
+    if (n === null){ sinPrecio += it.qty; }
+    else { total += n * it.qty; }
+  });
+  return { total, sinPrecio };
+}
+
 function buildOrderMessage(){
   const lines = Object.values(cart).map(it => '• ' + it.qty + 'x ' + it.subgrupo + ' — ' + it.nombre + ' (' + it.precio + ')');
-  return 'Hola! Quiero hacer este pedido:\n\n' + lines.join('\n') + '\n\n¡Gracias!';
+  const { total, sinPrecio } = cartSubtotal();
+  let totalLine = '\n\nSubtotal: ' + formatARS(total);
+  if (sinPrecio > 0){
+    totalLine += ' + ' + sinPrecio + ' producto(s) a precio a consultar';
+  }
+  return 'Hola! Quiero hacer este pedido:\n\n' + lines.join('\n') + totalLine + '\n\n' + SHIPPING_INFO + '\n\n¡Gracias!';
 }
 
 function renderCartDrawer(){
@@ -381,6 +410,14 @@ function renderCartDrawer(){
   `).join('');
   foot.hidden = false;
   countEl.textContent = cartTotalQty();
+
+  const { total, sinPrecio } = cartSubtotal();
+  const totalsEl = document.getElementById('cartTotals');
+  let totalsHtml = `<span class="cart-total-amount">Subtotal: ${formatARS(total)}</span>`;
+  if (sinPrecio > 0){
+    totalsHtml += `<span class="cart-total-note">+ ${sinPrecio} producto${sinPrecio > 1 ? 's' : ''} a precio a consultar</span>`;
+  }
+  totalsEl.innerHTML = totalsHtml;
 
   body.querySelectorAll('[data-remove]').forEach(btn => {
     btn.addEventListener('click', () => {
