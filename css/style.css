@@ -28,6 +28,13 @@
   a{text-decoration:none; color:inherit;}
   img{display:block; max-width:100%;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- ANNOUNCE BAR ---------- */
+  .announce-bar{
+    background:var(--sage-deep); color:var(--white);
+    text-align:center; font-size:.72rem; letter-spacing:.02em;
+    padding:9px 16px; line-height:1.4;
+  }
   .eyebrow{
     font-family:'Jost',sans-serif;
     text-transform:uppercase;
@@ -335,6 +342,13 @@
     display:flex; flex-direction:column; gap:10px;
   }
   .cart-summary{font-size:.8rem; color:var(--ink-soft); text-align:center;}
+  .cart-totals{
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    padding:8px 0; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line);
+  }
+  .cart-total-amount{font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--gold-deep); font-weight:600;}
+  .cart-total-note{font-size:.72rem; color:var(--ink-soft);}
+  .cart-shipping{font-size:.72rem; color:var(--ink-soft); text-align:center; line-height:1.5; padding:0 6px;}
   .cart-send-wa{justify-content:center; width:100%; padding:14px 20px;}
   .cart-clear{
     background:none; border:none; font-size:.75rem; color:var(--ink-soft);
