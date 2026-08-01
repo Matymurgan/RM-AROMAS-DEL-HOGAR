@@ -2,31 +2,91 @@
    CONFIGURACIÓN — EDITÁ ACÁ TUS DATOS
    ========================================================= */
 
-// 1) Tu número de WhatsApp con código de país (54) + 9 + código de área + número.
+// Tu número de WhatsApp con código de país (54) + 9 + código de área + número.
 const WHATSAPP_NUMBER = "5491164985550";
 
-// 2) Categorías y productos.
-//    foto: dejalo en null para mostrar un ícono, o poné la ruta de una imagen
-//    (ej: "images/sahumerio-lavanda.jpg") una vez que la subas a la carpeta /images.
-//    precio: "Consultar"  -> se muestra "Consultar precio"
-//    precio: "$5.500"     -> se muestra ese precio fijo
-//    variantes: lista opcional de aromas/colores disponibles (se muestra como chips debajo
-//    de la descripción). Dejala en [] si todavía no tenés el listado — la vamos a completar
-//    con la planilla de aromas.
+/* =========================================================
+   CATÁLOGO — Categoría → Subgrupo → Aromas/ítems.
+   - foto/icon: foto en null = usa el ícono.
+   - subgrupos[].precio: precio único para TODOS los ítems del subgrupo (ej: cualquier
+     aroma de Tibetanos cuesta lo mismo). Dejalo en "Consultar" si todavía no está definido.
+   - items: lista de aromas/variantes. Si un ítem puntual tiene su propio precio distinto
+     al del subgrupo (ej: Porta Sahumerios según material), agregale `precio` a ESE ítem
+     y va a pisar el precio general del subgrupo.
+   ========================================================= */
 const CATEGORIES = [
   {
     id: "cat-sahumerios",
     num: "01",
     titulo: "Sahumerios & Accesorios",
-    texto: "Líneas Aromanza en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios, conitos y cascadas de humo.",
+    texto: "Líneas Aromanza en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios y conos cascada.",
     foto: "images/aromanza-tibetanos.jpg",
     icon: "incienso",
     reverse: false,
-    productos: [
-      { nombre: "Sahumerios Tibetanos", desc: "Línea Aromanza, varillas largas de combustión pareja.", precio: "Consultar", icon: "incienso", foto: "images/aromanza-tibetanos.jpg", variantes: [] },
-      { nombre: "Sahumerios Élixir — Edición de Lujo", desc: "Inspirados en grandes perfumes: Vie Belle, 212, Opium de YSL, Scandal, One Million, Invictus.", precio: "Consultar", icon: "incienso", foto: "images/aromanza-elixir.jpg", variantes: ["Vie Belle","212","Opium de YSL","Scandal","One Million","Invictus"] },
-      { nombre: "Porta Sahumerios", desc: "Base en cerámica o madera, distintos diseños.", precio: "Consultar", icon: "base", foto: null, variantes: [] },
-      { nombre: "Conos Cascada (Backflow)", desc: "Efecto cascada de humo, 12 variantes/personalidades distintas.", precio: "Consultar", icon: "cascada", foto: "images/aromanza-cascada.jpg", variantes: [] }
+    subgrupos: [
+      {
+        nombre: "Sahumerios Aromanza Tibetanos",
+        desc: "Varillas largas, combustión pareja y prolongada.",
+        foto: "images/aromanza-tibetanos.jpg",
+        icon: "incienso",
+        precio: "$4.500",
+        items: [
+          { nombre: "Real Champa" }, { nombre: "Vainillas Encantadas" }, { nombre: "Néctar de los Dioses" },
+          { nombre: "Energía Limpia" }, { nombre: "Diamante Negro" }, { nombre: "Premium Lemon" },
+          { nombre: "Dulces Frutillas" }, { nombre: "Frutos Rojos" }, { nombre: "Coco Nut" },
+          { nombre: "Coco Vainilla" }, { nombre: "Chocolate" }, { nombre: "Capuchino" },
+          { nombre: "Chocolate Dubai" }, { nombre: "Citronela" }, { nombre: "Mix de Fragancias" }
+        ]
+      },
+      {
+        nombre: "Sahumerios Aromanza Slim",
+        desc: "Varillas finas, mismas fragancias que la línea Tibetanos.",
+        foto: "images/aromanza-tibetanos.jpg",
+        icon: "incienso",
+        precio: "$3.500",
+        items: [
+          { nombre: "Real Champa" }, { nombre: "Vainillas Encantadas" }, { nombre: "Néctar de los Dioses" },
+          { nombre: "Energía Limpia" }, { nombre: "Diamante Negro" }, { nombre: "Premium Lemon" },
+          { nombre: "Dulces Frutillas" }, { nombre: "Frutos Rojos" }, { nombre: "Coco Nut" },
+          { nombre: "Coco Vainilla" }, { nombre: "Chocolate" }, { nombre: "Capuchino" },
+          { nombre: "Chocolate Dubai" }, { nombre: "Citronela" }, { nombre: "Mix de Fragancias" }
+        ]
+      },
+      {
+        nombre: "Sahumerios Aromanza Élixir — Edición de Lujo",
+        desc: "Inspirados en grandes perfumes.",
+        foto: "images/aromanza-elixir.jpg",
+        icon: "incienso",
+        precio: "$4.000",
+        items: [
+          { nombre: "Opium Black" }, { nombre: "Scandal" }, { nombre: "Invictus" },
+          { nombre: "One Millón" }, { nombre: "212" }, { nombre: "La Vie Belle" }
+        ]
+      },
+      {
+        nombre: "Porta Sahumerios",
+        desc: "Elegí el material.",
+        foto: null,
+        icon: "base",
+        precio: "Consultar",
+        items: [
+          { nombre: "Plástico", precio: "$800" },
+          { nombre: "Madera", precio: "$1.600" },
+          { nombre: "Cerámica", precio: "$2.000" }
+        ]
+      },
+      {
+        nombre: "Conos Cascada (Backflow)",
+        desc: "Efecto cascada de humo, distintas personalidades/aromas.",
+        foto: "images/aromanza-cascada.jpg",
+        icon: "cascada",
+        precio: "Consultar",
+        items: [
+          { nombre: "Templanza" }, { nombre: "Inspiración" }, { nombre: "Transformación" },
+          { nombre: "Empoderamiento" }, { nombre: "Bienestar" }, { nombre: "Espiritualidad" },
+          { nombre: "Sabiduría" }, { nombre: "Meditación" }
+        ]
+      }
     ]
   },
   {
@@ -37,39 +97,144 @@ const CATEGORIES = [
     foto: "images/velas.jpg",
     icon: "vela",
     reverse: true,
-    productos: [
-      { nombre: "Vela Aromática Chica", desc: "Ideal para baños y espacios pequeños.", precio: "Consultar", icon: "vela", foto: null, variantes: [] },
-      { nombre: "Vela Aromática Grande", desc: "Mayor duración, fragancia envolvente.", precio: "Consultar", icon: "vela", foto: null, variantes: [] },
-      { nombre: "Porta Velas", desc: "Diseños en vidrio y cerámica.", precio: "Consultar", icon: "base", foto: null, variantes: [] }
+    subgrupos: [
+      {
+        nombre: "Velas Chicas",
+        desc: "Ideal para baños y espacios pequeños.",
+        foto: null,
+        icon: "vela",
+        precio: "Consultar",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
+      },
+      {
+        nombre: "Velas Grandes",
+        desc: "Mayor duración, fragancia envolvente.",
+        foto: null,
+        icon: "vela",
+        precio: "Consultar",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
+      },
+      {
+        nombre: "Porta Velas",
+        desc: "Diseños en vidrio y cerámica.",
+        foto: null,
+        icon: "base",
+        precio: "Consultar",
+        items: [ { nombre: "Modelo Vidrio" }, { nombre: "Modelo Cerámica" } ]
+      }
     ]
   },
   {
     id: "cat-difusores",
     num: "03",
     titulo: "Difusores & Dispersores",
-    texto: "Difusores de varillas con esencia concentrada y aparatos eléctricos para dispersar aroma de forma continua.",
-    foto: "images/aromanza-difusores.jpg",
+    texto: "Difusores de varillas de bambú en dos tamaños, más los aparatos para dispersar aroma sin llama.",
+    foto: "images/difusores.jpg",
     icon: "difusor",
     reverse: false,
-    productos: [
-      { nombre: "Difusor de Varillas Saphirus", desc: "Frasco de vidrio + varillas de ratán, aroma constante.", precio: "Consultar", icon: "difusor", foto: "images/difusores.jpg", variantes: [] },
-      { nombre: "Difusores Aromanza", desc: "Varios colores y fragancias, incluido Candy Grape.", precio: "Consultar", icon: "difusor", foto: "images/aromanza-difusores.jpg", variantes: ["Candy Grape"] },
-      { nombre: "Aparato Difusor Eléctrico", desc: "Dispersor ultrasónico para ambientar sin llama.", precio: "Consultar", icon: "enchufe", foto: null, variantes: [] }
+    subgrupos: [
+      {
+        nombre: "Difusor Aromanza 60ml",
+        desc: "Varillas de bambú, tamaño chico.",
+        foto: "images/aromanza-difusores.jpg",
+        icon: "difusor",
+        precio: "$4.000",
+        items: [
+          { nombre: "Hawuai" }, { nombre: "Premium Lemon" }, { nombre: "Naranja Pimienta" },
+          { nombre: "Mix Citric" }, { nombre: "Cereza y Pachuli" }, { nombre: "Gardenias" },
+          { nombre: "Flores Blancas" }, { nombre: "Granada Mediterránea" }, { nombre: "Vainilla" }, { nombre: "Coco" }
+        ]
+      },
+      {
+        nombre: "Difusor Aromanza 120ml",
+        desc: "Varillas de bambú, tamaño grande.",
+        foto: "images/aromanza-difusores.jpg",
+        icon: "difusor",
+        precio: "$7.000",
+        items: [
+          { nombre: "Hawuai" }, { nombre: "Premium Lemon" }, { nombre: "Naranja Pimienta" },
+          { nombre: "Mix Citric" }, { nombre: "Cereza y Pachuli" }, { nombre: "Gardenias" },
+          { nombre: "Flores Blancas" }, { nombre: "Granada Mediterránea" }, { nombre: "Vainilla" }, { nombre: "Coco" }
+        ]
+      },
+      {
+        nombre: "Difusor a Pilas (para Aerosol)",
+        desc: "Aparato dispersor a pilas para aromatizante en aerosol.",
+        foto: null,
+        icon: "enchufe",
+        precio: "$15.000 – $20.000",
+        items: [ { nombre: "Modelo único" } ]
+      },
+      {
+        nombre: "Difusor de Aromas Touch (Kit Completo)",
+        desc: "Kit completo listo para usar.",
+        foto: null,
+        icon: "enchufe",
+        precio: "$5.000",
+        items: [ { nombre: "Kit completo" } ]
+      },
+      {
+        nombre: "Repuesto Difusor Touch",
+        desc: "Repuesto para el difusor touch.",
+        foto: null,
+        icon: "enchufe",
+        precio: "$3.500",
+        items: [ { nombre: "Repuesto" } ]
+      }
     ]
   },
   {
     id: "cat-sprays",
     num: "04",
     titulo: "Sprays & Aromatizantes",
-    texto: "Aerosoles para ambientes, textiles y auto: perfumá cortinas, sommiers, el interior del auto y más.",
+    texto: "Aromatizantes de telas, aerosoles para ambiente y perfumadores para el auto.",
     foto: "images/aromatizantes.jpg",
     icon: "spray",
     reverse: true,
-    productos: [
-      { nombre: "Aerosol / Room Spray Saphirus", desc: "Para ambientar cualquier habitación al instante.", precio: "Consultar", icon: "spray", foto: "images/aromatizantes.jpg", variantes: [] },
-      { nombre: "Aromatizante Ambiente/Textil Aromanza", desc: "Perfuma telas y ambientes, varias fragancias.", precio: "Consultar", icon: "textil", foto: "images/aromanza-textil.jpg", variantes: [] },
-      { nombre: "Aromatizante para Auto Aromanza", desc: "Colgante para espejo retrovisor, larga duración.", precio: "Consultar", icon: "auto", foto: "images/aromanza-auto-sport.jpg", variantes: ["Auto Sport","Dulce Uva","Citric Lemon"] },
-      { nombre: "Aromatizante Textil Saphirus", desc: "Para cortinas, sommiers, sábanas y ropa.", precio: "Consultar", icon: "textil", foto: null, variantes: [] }
+    subgrupos: [
+      {
+        nombre: "Aromatizante de Telas Saphirus",
+        desc: "Para cortinas, sommiers, sábanas y ropa.",
+        foto: "images/aromatizantes.jpg",
+        icon: "textil",
+        precio: "$4.500",
+        items: [ { nombre: "Colección Disney" }, { nombre: "Rocío" }, { nombre: "Cony" } ]
+      },
+      {
+        nombre: "Aromatizante de Telas Aromanza",
+        desc: "Perfuma telas y ambientes.",
+        foto: "images/aromanza-textil.jpg",
+        icon: "textil",
+        precio: "$6.000",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
+      },
+      {
+        nombre: "Aerosol Ambiente Saphirus",
+        desc: "Para ambientar cualquier habitación al instante.",
+        foto: "images/aromatizantes.jpg",
+        icon: "spray",
+        precio: "$6.000",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
+      },
+      {
+        nombre: "Aerosol Ambiente Aromanza",
+        desc: "Para ambientar cualquier habitación al instante.",
+        foto: "images/aromatizantes.jpg",
+        icon: "spray",
+        precio: "$7.000",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
+      },
+      {
+        nombre: "Aromatizante para Auto Aromanza",
+        desc: "Colgante para espejo retrovisor, larga duración.",
+        foto: "images/aromanza-auto-sport.jpg",
+        icon: "auto",
+        precio: "$7.000",
+        items: [
+          { nombre: "Autosport" }, { nombre: "Uva" }, { nombre: "Hawuai" },
+          { nombre: "Premium Lemon" }, { nombre: "Vainilla" }
+        ]
+      }
     ]
   },
   {
@@ -80,9 +245,23 @@ const CATEGORIES = [
     foto: null,
     icon: "botella",
     reverse: false,
-    productos: [
-      { nombre: "Concentrado Multiuso Shiny", desc: "Alto rendimiento, diluible según uso.", precio: "Consultar", icon: "botella", foto: null, variantes: [] },
-      { nombre: "Concentrado para Pisos Shiny", desc: "Perfuma y limpia en profundidad.", precio: "Consultar", icon: "botella", foto: null, variantes: [] }
+    subgrupos: [
+      {
+        nombre: "Concentrado Multiuso Shiny",
+        desc: "Alto rendimiento, diluible según uso.",
+        foto: null,
+        icon: "botella",
+        precio: "Consultar",
+        items: [ { nombre: "Presentación única" } ]
+      },
+      {
+        nombre: "Concentrado para Pisos Shiny",
+        desc: "Perfuma y limpia en profundidad.",
+        foto: null,
+        icon: "botella",
+        precio: "Consultar",
+        items: [ { nombre: "Presentación única" } ]
+      }
     ]
   }
 ];
@@ -90,7 +269,6 @@ const CATEGORIES = [
 const ICONS = {
   incienso: '<path d="M8 21h8M9 21c0-5 1-6 1-9M15 21c0-5-1-6-1-9M10 12c-1-3 0-5 2-8 2 3 3 5 2 8"/>',
   base: '<path d="M4 19h16M6 19l1-4h10l1 4M9 15V9a3 3 0 016 0v6"/>',
-  cono: '<path d="M12 3l4 15H8l4-15z"/><path d="M6 21h12"/>',
   cascada: '<path d="M12 2c2 3 1 4-1 6s-3 3-1 6 1 4-1 6"/><path d="M4 21h16"/>',
   vela: '<path d="M9 21V10a3 3 0 016 0v11"/><path d="M6 21h12"/><path d="M12 7c1-1 1-2 0-4-1 2-1 3 0 4z"/>',
   difusor: '<path d="M8 21h8M9 21l-1-9a2 2 0 012-2h4a2 2 0 012 2l-1 9"/><path d="M10 10V6a2 2 0 014 0v4"/><path d="M9 3l3 2 3-2"/>',
@@ -101,16 +279,129 @@ const ICONS = {
   botella: '<path d="M10 2h4v3l2 2v13a2 2 0 01-2 2h-4a2 2 0 01-2-2V7l2-2V2z"/><path d="M9 12h6"/>'
 };
 
-/* ================== RENDER ================== */
-function waLink(mensaje){
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+/* =========================================================
+   CARRITO — persistido en localStorage
+   ========================================================= */
+let cart = {};
+try {
+  cart = JSON.parse(localStorage.getItem('rm_cart') || '{}');
+} catch (e) {
+  cart = {};
 }
 
-function mediaBlock(foto, icon, alt){
-  if (foto){
-    return `<div class="card-media"><img src="${foto}" alt="${alt}" loading="lazy"></div>`;
+function slug(str){
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+function itemId(catTitulo, subNombre, itemNombre){
+  return slug(catTitulo) + '__' + slug(subNombre) + '__' + slug(itemNombre);
+}
+function effectivePrice(item, sub){
+  return item.precio || sub.precio || 'Consultar';
+}
+function saveCart(){
+  try { localStorage.setItem('rm_cart', JSON.stringify(cart)); } catch(e) {}
+}
+function cartTotalQty(){
+  return Object.values(cart).reduce((sum, it) => sum + it.qty, 0);
+}
+function setQty(id, meta, qty){
+  qty = Math.max(0, qty);
+  if (qty === 0){
+    delete cart[id];
+  } else {
+    cart[id] = Object.assign({}, meta, { qty: qty });
   }
-  return `<div class="card-media"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon] || ICONS.base}</svg></div>`;
+  saveCart();
+  updateQtyUI(id, qty);
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function updateQtyUI(id, qty){
+  document.querySelectorAll('[data-id="' + CSS.escape(id) + '"]').forEach(row => {
+    const val = row.querySelector('.qty-val');
+    if (val) val.textContent = qty;
+    row.classList.toggle('active', qty > 0);
+  });
+  const rowEl = document.querySelector('.item-row[data-id="' + CSS.escape(id) + '"]');
+  const sub = rowEl ? rowEl.closest('.subgroup-body') : null;
+  if (sub) updateSubgroupCount(sub);
+}
+
+function updateSubgroupCount(bodyEl){
+  const head = bodyEl.previousElementSibling;
+  const countEl = head ? head.querySelector('.subgroup-count') : null;
+  if (!countEl) return;
+  let total = 0;
+  bodyEl.querySelectorAll('.item-row').forEach(row => {
+    total += parseInt((row.querySelector('.qty-val') || {}).textContent || '0', 10);
+  });
+  if (total > 0){
+    countEl.textContent = total + (total > 1 ? ' seleccionados' : ' seleccionado');
+    countEl.classList.add('has-items');
+  } else {
+    countEl.textContent = '';
+    countEl.classList.remove('has-items');
+  }
+}
+
+function updateCartBadge(){
+  const badge = document.getElementById('cartBadge');
+  const total = cartTotalQty();
+  badge.textContent = total;
+  badge.classList.add('bump');
+  setTimeout(() => badge.classList.remove('bump'), 200);
+}
+
+function buildOrderMessage(){
+  const lines = Object.values(cart).map(it => '• ' + it.qty + 'x ' + it.subgrupo + ' — ' + it.nombre + ' (' + it.precio + ')');
+  return 'Hola! Quiero hacer este pedido:\n\n' + lines.join('\n') + '\n\n¡Gracias!';
+}
+
+function renderCartDrawer(){
+  const body = document.getElementById('cartBody');
+  const foot = document.getElementById('cartFoot');
+  const countEl = document.getElementById('cartCount');
+  const items = Object.entries(cart);
+
+  if (items.length === 0){
+    body.innerHTML = '<p class="cart-empty">Todavía no agregaste productos. Elegí cantidades desde el catálogo y van a aparecer acá.</p>';
+    foot.hidden = true;
+    return;
+  }
+
+  body.innerHTML = items.map(([id, it]) => `
+    <div class="cart-row">
+      <div class="cart-row-info">
+        <div class="cart-row-name">${it.qty}x ${it.nombre}</div>
+        <div class="cart-row-sub">${it.categoria} · ${it.subgrupo} · ${it.precio}</div>
+      </div>
+      <button class="cart-row-remove" data-remove="${id}" aria-label="Quitar">&times;</button>
+    </div>
+  `).join('');
+  foot.hidden = false;
+  countEl.textContent = cartTotalQty();
+
+  body.querySelectorAll('[data-remove]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-remove');
+      setQty(id, cart[id], 0);
+    });
+  });
+
+  document.getElementById('cartSendWa').href = waLink(buildOrderMessage());
+}
+
+/* ================== RENDER CATÁLOGO ================== */
+function waLink(mensaje){
+  return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(mensaje);
+}
+
+function mediaBlock(foto, icon, alt, cls){
+  if (foto){
+    return `<div class="${cls}"><img src="${foto}" alt="${alt}" loading="lazy"></div>`;
+  }
+  return `<div class="${cls}"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon] || ICONS.base}</svg></div>`;
 }
 
 function render(){
@@ -118,25 +409,45 @@ function render(){
   main.innerHTML = CATEGORIES.map(cat => {
     const fotoBlock = cat.foto
       ? `<div class="cat-photo"><img src="${cat.foto}" alt="${cat.titulo}" loading="lazy"></div>`
-      : `<div class="cat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat.icon]}</svg></div>`;
+      : `<div class="cat-icon-box"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat.icon]}</svg></div>`;
 
-    const cards = cat.productos.map(p => `
-      <div class="card">
-        ${mediaBlock(p.foto, p.icon, p.nombre)}
-        <div class="card-body">
-          <h3>${p.nombre}</h3>
-          <p>${p.desc}</p>
-          ${(p.variantes && p.variantes.length) ? `<div class="chips">${p.variantes.map(v => `<span class="chip">${v}</span>`).join('')}</div>` : ''}
-          <div class="card-foot">
-            <span class="price">${p.precio === 'Consultar' ? 'Consultar precio' : `<span class="price-tag">${p.precio}</span>`}</span>
-            <a class="ask-btn" target="_blank" rel="noopener" href="${waLink('Hola! Quiero consultar por: ' + p.nombre)}">
-              Pedir
-              <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.4-8.5 8.4z"/></svg>
-            </a>
+    const subgroupsHtml = cat.subgrupos.map((sub, idx) => {
+      const itemsHtml = sub.items.map(item => {
+        const id = itemId(cat.titulo, sub.nombre, item.nombre);
+        const qty = (cart[id] && cart[id].qty) || 0;
+        const precio = effectivePrice(item, sub);
+        return `
+          <li class="item-row ${qty > 0 ? 'active' : ''}" data-id="${id}">
+            <div class="item-info">
+              <span class="item-name">${item.nombre}</span>
+              <span class="item-price">${precio === 'Consultar' ? 'Consultar precio' : precio}</span>
+            </div>
+            <div class="qty-control">
+              <button class="qty-btn minus" data-action="minus" data-id="${id}" aria-label="Restar">−</button>
+              <span class="qty-val">${qty}</span>
+              <button class="qty-btn plus" data-action="plus" data-id="${id}" aria-label="Sumar">+</button>
+            </div>
+          </li>
+        `;
+      }).join('');
+
+      return `
+        <div class="subgroup ${idx === 0 ? 'open' : ''}">
+          <button class="subgroup-head" type="button">
+            ${mediaBlock(sub.foto, sub.icon, sub.nombre, 'subgroup-media')}
+            <div class="subgroup-title-wrap">
+              <div class="subgroup-name">${sub.nombre}</div>
+              <div class="subgroup-count"></div>
+            </div>
+            <svg class="chev" viewBox="0 0 24 24" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="subgroup-body">
+            <p class="subgroup-desc">${sub.desc}</p>
+            <ul class="item-list">${itemsHtml}</ul>
           </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     return `
       <section class="category" id="${cat.id}">
@@ -149,17 +460,66 @@ function render(){
               <p>${cat.texto}</p>
             </div>
           </div>
-          <div class="prod-grid">${cards}</div>
+          <div class="subgroups">${subgroupsHtml}</div>
         </div>
       </section>
     `;
   }).join('');
 
+  document.querySelectorAll('.subgroup').forEach(sub => {
+    const bodyEl = sub.querySelector('.subgroup-body');
+    if (sub.classList.contains('open')){
+      bodyEl.style.maxHeight = bodyEl.scrollHeight + 'px';
+    }
+  });
+  document.querySelectorAll('.subgroup-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const sub = head.closest('.subgroup');
+      const bodyEl = sub.querySelector('.subgroup-body');
+      const isOpen = sub.classList.toggle('open');
+      bodyEl.style.maxHeight = isOpen ? bodyEl.scrollHeight + 'px' : null;
+    });
+  });
+
+  document.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      const row = btn.closest('.item-row');
+      const current = parseInt(row.querySelector('.qty-val').textContent, 10);
+      const delta = btn.getAttribute('data-action') === 'plus' ? 1 : -1;
+      const meta = findItemMeta(id);
+      setQty(id, meta, current + delta);
+      const bodyEl = row.closest('.subgroup-body');
+      if (bodyEl && bodyEl.closest('.subgroup').classList.contains('open')){
+        bodyEl.style.maxHeight = bodyEl.scrollHeight + 'px';
+      }
+    });
+  });
+
+  document.querySelectorAll('.subgroup-body').forEach(updateSubgroupCount);
+
   const genericLink = waLink('Hola! Quiero consultar el catálogo de RM Aromas para el Hogar.');
   document.querySelectorAll('#navWaBtn, .hero-wa-link, .cta-wa-link, .foot-wa-link, #floatWa').forEach(el => {
     el.href = genericLink;
   });
+
+  updateCartBadge();
+  renderCartDrawer();
 }
+
+function findItemMeta(id){
+  for (const cat of CATEGORIES){
+    for (const sub of cat.subgrupos){
+      for (const item of sub.items){
+        if (itemId(cat.titulo, sub.nombre, item.nombre) === id){
+          return { nombre: item.nombre, precio: effectivePrice(item, sub), subgrupo: sub.nombre, categoria: cat.titulo };
+        }
+      }
+    }
+  }
+  return null;
+}
+
 render();
 
 /* ================== MOBILE MENU ================== */
@@ -167,3 +527,31 @@ const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ================== CART DRAWER OPEN/CLOSE ================== */
+const floatCart = document.getElementById('floatCart');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartDrawer = document.getElementById('cartDrawer');
+const cartClose = document.getElementById('cartClose');
+const cartClear = document.getElementById('cartClear');
+
+function openCart(){
+  cartOverlay.classList.add('open');
+  cartDrawer.classList.add('open');
+}
+function closeCart(){
+  cartOverlay.classList.remove('open');
+  cartDrawer.classList.remove('open');
+}
+floatCart.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+cartOverlay.addEventListener('click', closeCart);
+cartClear.addEventListener('click', () => {
+  Object.keys(cart).forEach(id => {
+    delete cart[id];
+    updateQtyUI(id, 0);
+  });
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+});
