@@ -22,8 +22,8 @@ const CATEGORIES = [
     id: "cat-sahumerios",
     num: "01",
     titulo: "Sahumerios & Accesorios",
-    texto: "Líneas Aromanza en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios y conos cascada.",
-    foto: "images/aromanza-tibetanos.jpg",
+    texto: "Sahumerios en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios y conos cascada.",
+    foto: "images/porta-sahumerios-generico.jpg",
     icon: "incienso",
     reverse: false,
     subgrupos: [
