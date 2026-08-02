@@ -124,6 +124,30 @@ const CATEGORIES = [
         icon: "base",
         precio: "Consultar",
         items: [ { nombre: "Modelo Vidrio" }, { nombre: "Modelo Cerámica" } ]
+      },
+      {
+        nombre: "Hornillos",
+        desc: "Quemador para calentar esencias o velas para hornillo y perfumar el ambiente.",
+        foto: null,
+        icon: "hornillo",
+        precio: "Consultar",
+        items: [ { nombre: "Modelo único" } ]
+      },
+      {
+        nombre: "Velas para Hornillos",
+        desc: "Velas chicas calentadoras, para usar dentro del hornillo.",
+        foto: null,
+        icon: "velita",
+        precio: "Consultar",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
+      },
+      {
+        nombre: "Esencias para Hornillos",
+        desc: "Aceites esenciales para usar en el hornillo.",
+        foto: null,
+        icon: "esencia",
+        precio: "Consultar",
+        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
       }
     ]
   },
@@ -272,6 +296,9 @@ const CATEGORIES = [
 const ICONS = {
   incienso: '<path d="M8 21h8M9 21c0-5 1-6 1-9M15 21c0-5-1-6-1-9M10 12c-1-3 0-5 2-8 2 3 3 5 2 8"/>',
   base: '<path d="M4 19h16M6 19l1-4h10l1 4M9 15V9a3 3 0 016 0v6"/>',
+  hornillo: '<path d="M7 8c0 3 2.2 5 5 5s5-2 5-5"/><path d="M12 13v4"/><path d="M8 21c0-2.2 1.8-4 4-4s4 1.8 4 4"/><path d="M9.5 3.5c0 1 .8 1 .8 2s-.8 1-.8 2M14.5 3.5c0 1-.8 1-.8 2s.8 1 .8 2"/>',
+  velita: '<path d="M6 13.5h12V18a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 016 18v-4.5z"/><ellipse cx="12" cy="13.5" rx="6" ry="1.6"/><path d="M12 9.5c1.2-1.1 1.2-2.2 0-4.2-1.2 2-1.2 3.1 0 4.2z"/>',
+  esencia: '<rect x="9" y="9.5" width="6" height="9.5" rx="1.4"/><path d="M10.4 9.5V5.8a1.6 1.6 0 013.2 0V9.5"/><path d="M12 3v1.6"/>',
   cascada: '<path d="M12 2c2 3 1 4-1 6s-3 3-1 6 1 4-1 6"/><path d="M4 21h16"/>',
   vela: '<path d="M9 21V10a3 3 0 016 0v11"/><path d="M6 21h12"/><path d="M12 7c1-1 1-2 0-4-1 2-1 3 0 4z"/>',
   difusor: '<path d="M8 21h8M9 21l-1-9a2 2 0 012-2h4a2 2 0 012 2l-1 9"/><path d="M10 10V6a2 2 0 014 0v4"/><path d="M9 3l3 2 3-2"/>',
