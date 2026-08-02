@@ -128,7 +128,7 @@ const CATEGORIES = [
       {
         nombre: "Hornillos",
         desc: "Quemador para calentar esencias o velas para hornillo y perfumar el ambiente.",
-        foto: null,
+        foto: "images/hornillo.jpg",
         icon: "hornillo",
         precio: "Consultar",
         items: [ { nombre: "Modelo único" } ]
@@ -136,7 +136,7 @@ const CATEGORIES = [
       {
         nombre: "Velas para Hornillos",
         desc: "Velas chicas calentadoras, para usar dentro del hornillo.",
-        foto: null,
+        foto: "images/velas-hornillo.jpg",
         icon: "velita",
         precio: "Consultar",
         items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
@@ -144,10 +144,13 @@ const CATEGORIES = [
       {
         nombre: "Esencias para Hornillos",
         desc: "Aceites esenciales para usar en el hornillo.",
-        foto: null,
+        foto: "images/esencias-hornillo.jpg",
         icon: "esencia",
         precio: "Consultar",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
+        items: [
+          { nombre: "Lavanda" }, { nombre: "Eucalipto" }, { nombre: "Menta" },
+          { nombre: "Árbol de Té" }, { nombre: "Sándalo" }
+        ]
       }
     ]
   },
@@ -267,19 +270,28 @@ const CATEGORIES = [
   {
     id: "cat-limpieza",
     num: "05",
-    titulo: "Línea Limpieza Shiny",
-    texto: "Líquidos concentrados de limpieza Shiny, rendidores y perfumados, para dejar tu hogar impecable.",
-    foto: null,
+    titulo: "Línea Limpieza",
+    texto: "Líquidos concentrados de limpieza, rendidores y perfumados, para dejar tu hogar impecable.",
+    foto: "images/limpieza-generico.jpg",
     icon: "botella",
     reverse: false,
     subgrupos: [
       {
-        nombre: "Concentrado Multiuso Shiny",
-        desc: "Alto rendimiento, diluible según uso.",
-        foto: null,
+        nombre: "Concentrado Multisuperficies Shiny",
+        desc: "Fórmula concentrada, rinde mucho más diluido.",
+        foto: "images/shiny-mix-citrico.jpg",
         icon: "botella",
         precio: "Consultar",
-        items: [ { nombre: "Presentación única" } ]
+        items: [
+          { nombre: "Mix Cítrico", foto: "images/shiny-mix-citrico.jpg" },
+          { nombre: "Pétalos Florales", foto: "images/shiny-petalos-florales.jpg" },
+          { nombre: "Tropical", foto: "images/shiny-tropical.jpg" },
+          { nombre: "Frutos Rojos", foto: "images/shiny-frutos-rojos.jpg" },
+          { nombre: "Marina", foto: "images/shiny-marina.jpg" },
+          { nombre: "Lavanda", foto: "images/shiny-lavanda.jpg" },
+          { nombre: "Bebé", foto: "images/shiny-bebe.jpg" },
+          { nombre: "Bamboo", foto: "images/shiny-bamboo.jpg" }
+        ]
       },
       {
         nombre: "Concentrado para Pisos Shiny",
@@ -288,6 +300,22 @@ const CATEGORIES = [
         icon: "botella",
         precio: "Consultar",
         items: [ { nombre: "Presentación única" } ]
+      },
+      {
+        nombre: "Limpiavidrios Shiny",
+        desc: "Limpia sin dejar vetas, listo para usar.",
+        foto: "images/shiny-limpiavidrios.jpg",
+        icon: "botella",
+        precio: "Consultar",
+        items: [ { nombre: "Limpiavidrios & Multiusos" } ]
+      },
+      {
+        nombre: "Desengrasante para Cocinas Shiny",
+        desc: "Elimina la grasa más resistente.",
+        foto: "images/shiny-desengrasante.jpg",
+        icon: "botella",
+        precio: "Consultar",
+        items: [ { nombre: "Desengrasante" } ]
       }
     ]
   }
@@ -482,6 +510,7 @@ function render(){
         const precio = effectivePrice(item, sub);
         return `
           <li class="item-row ${qty > 0 ? 'active' : ''}" data-id="${id}">
+            ${item.foto ? `<div class="item-thumb"><img src="${item.foto}" alt="${item.nombre}" loading="lazy"></div>` : ''}
             <div class="item-info">
               <span class="item-name">${item.nombre}</span>
               <span class="item-price">${precio === 'Consultar' ? 'Consultar precio' : precio}</span>
