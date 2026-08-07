@@ -17,309 +17,38 @@ const SHIPPING_INFO = "Envío gratis a CABA y GBA en compras superiores a $50.00
      al del subgrupo (ej: Porta Sahumerios según material), agregale `precio` a ESE ítem
      y va a pisar el precio general del subgrupo.
    ========================================================= */
-const CATEGORIES = [
-  {
-    id: "cat-sahumerios",
-    num: "01",
-    titulo: "Sahumerios & Accesorios",
-    texto: "Sahumerios en distintas fragancias, más todo lo necesario para quemarlos: porta sahumerios y conos cascada.",
-    foto: "images/porta-sahumerios-generico.jpg",
-    icon: "incienso",
-    reverse: false,
-    subgrupos: [
-      {
-        nombre: "Sahumerios Aromanza Tibetanos",
-        desc: "Varillas largas, combustión pareja y prolongada.",
-        foto: "images/aromanza-tibetanos.jpg",
-        icon: "incienso",
-        precio: "$4.500",
-        items: [
-          { nombre: "Real Champa" }, { nombre: "Vainillas Encantadas" }, { nombre: "Néctar de los Dioses" },
-          { nombre: "Energía Limpia" }, { nombre: "Diamante Negro" }, { nombre: "Premium Lemon" },
-          { nombre: "Dulces Frutillas" }, { nombre: "Frutos Rojos" }, { nombre: "Coco Nut" },
-          { nombre: "Coco Vainilla" }, { nombre: "Chocolate" }, { nombre: "Capuchino" },
-          { nombre: "Chocolate Dubai" }, { nombre: "Citronela" }, { nombre: "Mix de Fragancias" }
-        ]
-      },
-      {
-        nombre: "Sahumerios Aromanza Slim",
-        desc: "Varillas finas, mismas fragancias que la línea Tibetanos.",
-        foto: "images/aromanza-tibetanos.jpg",
-        icon: "incienso",
-        precio: "$3.500",
-        items: [
-          { nombre: "Real Champa" }, { nombre: "Vainillas Encantadas" }, { nombre: "Néctar de los Dioses" },
-          { nombre: "Energía Limpia" }, { nombre: "Diamante Negro" }, { nombre: "Premium Lemon" },
-          { nombre: "Dulces Frutillas" }, { nombre: "Frutos Rojos" }, { nombre: "Coco Nut" },
-          { nombre: "Coco Vainilla" }, { nombre: "Chocolate" }, { nombre: "Capuchino" },
-          { nombre: "Chocolate Dubai" }, { nombre: "Citronela" }, { nombre: "Mix de Fragancias" }
-        ]
-      },
-      {
-        nombre: "Sahumerios Aromanza Élixir — Edición de Lujo",
-        desc: "Inspirados en grandes perfumes.",
-        foto: "images/aromanza-elixir.jpg",
-        icon: "incienso",
-        precio: "$4.000",
-        items: [
-          { nombre: "Opium Black" }, { nombre: "Scandal" }, { nombre: "Invictus" },
-          { nombre: "One Millón" }, { nombre: "212" }, { nombre: "La Vie Belle" }
-        ]
-      },
-      {
-        nombre: "Porta Sahumerios",
-        desc: "Elegí el material.",
-        foto: "images/porta-sahumerios-generico.jpg",
-        icon: "base",
-        precio: "Consultar",
-        items: [
-          { nombre: "Plástico", precio: "$800" },
-          { nombre: "Madera", precio: "$1.600" },
-          { nombre: "Cerámica", precio: "$2.000" }
-        ]
-      },
-      {
-        nombre: "Conos Cascada (Backflow)",
-        desc: "Efecto cascada de humo, distintas personalidades/aromas.",
-        foto: "images/aromanza-cascada.jpg",
-        icon: "cascada",
-        precio: "Consultar",
-        items: [
-          { nombre: "Templanza" }, { nombre: "Inspiración" }, { nombre: "Transformación" },
-          { nombre: "Empoderamiento" }, { nombre: "Bienestar" }, { nombre: "Espiritualidad" },
-          { nombre: "Sabiduría" }, { nombre: "Meditación" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "cat-velas",
-    num: "02",
-    titulo: "Velas Aromáticas",
-    texto: "Velas perfumadas para cada ambiente, acompañadas de porta velas para lucirlas en cualquier rincón de la casa.",
-    foto: "images/velas.jpg",
-    icon: "vela",
-    reverse: true,
-    subgrupos: [
-      {
-        nombre: "Velas Chicas",
-        desc: "Ideal para baños y espacios pequeños.",
-        foto: null,
-        icon: "vela",
-        precio: "Consultar",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
-      },
-      {
-        nombre: "Velas Grandes",
-        desc: "Mayor duración, fragancia envolvente.",
-        foto: null,
-        icon: "vela",
-        precio: "Consultar",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
-      },
-      {
-        nombre: "Porta Velas",
-        desc: "Diseños en vidrio y cerámica.",
-        foto: null,
-        icon: "base",
-        precio: "Consultar",
-        items: [ { nombre: "Modelo Vidrio" }, { nombre: "Modelo Cerámica" } ]
-      },
-      {
-        nombre: "Hornillos",
-        desc: "Quemador para calentar esencias o velas para hornillo y perfumar el ambiente.",
-        foto: "images/hornillo.jpg",
-        icon: "hornillo",
-        precio: "Consultar",
-        items: [ { nombre: "Modelo único" } ]
-      },
-      {
-        nombre: "Velas para Hornillos",
-        desc: "Velas chicas calentadoras, para usar dentro del hornillo.",
-        foto: "images/velas-hornillo.jpg",
-        icon: "velita",
-        precio: "Consultar",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" } ]
-      },
-      {
-        nombre: "Esencias para Hornillos",
-        desc: "Aceites esenciales para usar en el hornillo.",
-        foto: "images/esencias-hornillo.jpg",
-        icon: "esencia",
-        precio: "Consultar",
-        items: [
-          { nombre: "Lavanda" }, { nombre: "Eucalipto" }, { nombre: "Menta" },
-          { nombre: "Árbol de Té" }, { nombre: "Sándalo" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "cat-difusores",
-    num: "03",
-    titulo: "Difusores & Dispersores",
-    texto: "Difusores de varillas de bambú en dos tamaños, más los aparatos para dispersar aroma sin llama.",
-    foto: "images/difusores.jpg",
-    icon: "difusor",
-    reverse: false,
-    subgrupos: [
-      {
-        nombre: "Difusor Aromanza 60ml",
-        desc: "Varillas de bambú, tamaño chico.",
-        foto: "images/aromanza-difusores.jpg",
-        icon: "difusor",
-        precio: "$4.000",
-        items: [
-          { nombre: "Hawuai" }, { nombre: "Premium Lemon" }, { nombre: "Naranja Pimienta" },
-          { nombre: "Mix Citric" }, { nombre: "Cereza y Pachuli" }, { nombre: "Gardenias" },
-          { nombre: "Flores Blancas" }, { nombre: "Granada Mediterránea" }, { nombre: "Vainilla" }, { nombre: "Coco" }
-        ]
-      },
-      {
-        nombre: "Difusor Aromanza 120ml",
-        desc: "Varillas de bambú, tamaño grande.",
-        foto: "images/aromanza-difusores.jpg",
-        icon: "difusor",
-        precio: "$7.000",
-        items: [
-          { nombre: "Hawuai" }, { nombre: "Premium Lemon" }, { nombre: "Naranja Pimienta" },
-          { nombre: "Mix Citric" }, { nombre: "Cereza y Pachuli" }, { nombre: "Gardenias" },
-          { nombre: "Flores Blancas" }, { nombre: "Granada Mediterránea" }, { nombre: "Vainilla" }, { nombre: "Coco" }
-        ]
-      },
-      {
-        nombre: "Difusor Analógico (para Aerosol)",
-        desc: "Aparato dispersor automático, funciona con las latas de aerosol para ambiente.",
-        foto: "images/difusor-analogico.jpg",
-        icon: "enchufe",
-        precio: "$15.000 – $20.000",
-        items: [ { nombre: "Modelo único" } ]
-      },
-      {
-        nombre: "Difusor de Aromas Touch (Kit Completo)",
-        desc: "Kit completo listo para usar: aparato + repuesto.",
-        foto: "images/saphirus-touch-kit.jpg",
-        icon: "enchufe",
-        precio: "$5.000",
-        items: [ { nombre: "Agua Marina" } ]
-      },
-      {
-        nombre: "Repuesto Difusor Touch",
-        desc: "Repuesto para el difusor touch.",
-        foto: "images/saphirus-touch-repuesto.jpg",
-        icon: "enchufe",
-        precio: "$3.500",
-        items: [ { nombre: "Agua Marina" } ]
-      }
-    ]
-  },
-  {
-    id: "cat-sprays",
-    num: "04",
-    titulo: "Sprays & Aromatizantes",
-    texto: "Aromatizantes de telas, aerosoles para ambiente y perfumadores para el auto.",
-    foto: "images/aromatizantes.jpg",
-    icon: "spray",
-    reverse: true,
-    subgrupos: [
-      {
-        nombre: "Aromatizante de Telas Saphirus",
-        desc: "Para cortinas, sommiers, sábanas y ropa.",
-        foto: "images/aromatizantes.jpg",
-        icon: "textil",
-        precio: "$4.500",
-        items: [ { nombre: "Colección Disney" }, { nombre: "Rocío" }, { nombre: "Cony" } ]
-      },
-      {
-        nombre: "Aromatizante de Telas Aromanza",
-        desc: "Perfuma telas y ambientes.",
-        foto: "images/aromanza-textil.jpg",
-        icon: "textil",
-        precio: "$6.000",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
-      },
-      {
-        nombre: "Aerosol Ambiente Saphirus",
-        desc: "Para ambientar cualquier habitación al instante.",
-        foto: "images/saphirus-aerosol.jpg",
-        icon: "spray",
-        precio: "$6.000",
-        items: [ { nombre: "Blue" }, { nombre: "One Million" }, { nombre: "Maracuyá" } ]
-      },
-      {
-        nombre: "Aerosol Ambiente Aromanza",
-        desc: "Para ambientar cualquier habitación al instante.",
-        foto: "images/aromatizantes.jpg",
-        icon: "spray",
-        precio: "$7.000",
-        items: [ { nombre: "Aroma a definir 1" }, { nombre: "Aroma a definir 2" }, { nombre: "Aroma a definir 3" } ]
-      },
-      {
-        nombre: "Aromatizante para Auto Aromanza",
-        desc: "Colgante para espejo retrovisor, larga duración.",
-        foto: "images/aromanza-auto-sport.jpg",
-        icon: "auto",
-        precio: "$7.000",
-        items: [
-          { nombre: "Autosport" }, { nombre: "Uva" }, { nombre: "Hawuai" },
-          { nombre: "Premium Lemon" }, { nombre: "Vainilla" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "cat-limpieza",
-    num: "05",
-    titulo: "Línea Limpieza",
-    texto: "Líquidos concentrados de limpieza, rendidores y perfumados, para dejar tu hogar impecable.",
-    foto: "images/limpieza-generico.jpg",
-    icon: "botella",
-    reverse: false,
-    subgrupos: [
-      {
-        nombre: "Concentrado Multisuperficies Shiny",
-        desc: "Fórmula concentrada, rinde mucho más diluido.",
-        foto: "images/shiny-mix-citrico.jpg",
-        icon: "botella",
-        precio: "Consultar",
-        items: [
-          { nombre: "Mix Cítrico", foto: "images/shiny-mix-citrico.jpg" },
-          { nombre: "Pétalos Florales", foto: "images/shiny-petalos-florales.jpg" },
-          { nombre: "Tropical", foto: "images/shiny-tropical.jpg" },
-          { nombre: "Frutos Rojos", foto: "images/shiny-frutos-rojos.jpg" },
-          { nombre: "Marina", foto: "images/shiny-marina.jpg" },
-          { nombre: "Lavanda", foto: "images/shiny-lavanda.jpg" },
-          { nombre: "Bebé", foto: "images/shiny-bebe.jpg" },
-          { nombre: "Bamboo", foto: "images/shiny-bamboo.jpg" }
-        ]
-      },
-      {
-        nombre: "Concentrado para Pisos Shiny",
-        desc: "Perfuma y limpia en profundidad.",
-        foto: null,
-        icon: "botella",
-        precio: "Consultar",
-        items: [ { nombre: "Presentación única" } ]
-      },
-      {
-        nombre: "Limpiavidrios Shiny",
-        desc: "Limpia sin dejar vetas, listo para usar.",
-        foto: "images/shiny-limpiavidrios.jpg",
-        icon: "botella",
-        precio: "Consultar",
-        items: [ { nombre: "Limpiavidrios & Multiusos" } ]
-      },
-      {
-        nombre: "Desengrasante para Cocinas Shiny",
-        desc: "Elimina la grasa más resistente.",
-        foto: "images/shiny-desengrasante.jpg",
-        icon: "botella",
-        precio: "Consultar",
-        items: [ { nombre: "Desengrasante" } ]
-      }
-    ]
-  }
-];
+// =========================================================
+// CONEXIÓN A SUPABASE — completá con los datos de tu proyecto
+// =========================================================
+const SUPABASE_URL = "https://hvjxosjkfrqgglcfjchb.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2anhvc2prZnJxZ2dsY2ZqY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNzkzODksImV4cCI6MjEwMTY1NTM4OX0.PS_XsP3ababhIhdviNAWUEiAVFJ7L4I60M0cuoo9RFI";
+
+let CATEGORIES = [];
+
+async function cargarCatalogoDesdeSupabase(){
+  const headers = { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY };
+
+  const [catsRes, subsRes, itemsRes] = await Promise.all([
+    fetch(SUPABASE_URL + "/rest/v1/categorias?select=*&order=numero", { headers }),
+    fetch(SUPABASE_URL + "/rest/v1/subgrupos?select=*", { headers }),
+    fetch(SUPABASE_URL + "/rest/v1/items?select=*", { headers })
+  ]);
+
+  const cats = await catsRes.json();
+  const subs = await subsRes.json();
+  const items = await itemsRes.json();
+
+  CATEGORIES = cats.map(c => ({
+    id: c.id, num: c.numero, titulo: c.titulo, texto: c.texto,
+    foto: c.foto, icon: c.icono, reverse: false,
+    subgrupos: subs.filter(s => s.categoria_id === c.id).map(s => ({
+      nombre: s.nombre, desc: s.descripcion, foto: s.foto, icon: s.icono, precio: s.precio,
+      items: items.filter(it => it.subgrupo_id === s.id).map(it => ({
+        nombre: it.nombre, precio: it.precio || undefined, foto: it.foto || undefined
+      }))
+    }))
+  }));
+}
 
 const ICONS = {
   incienso: '<path d="M8 21h8M9 21c0-5 1-6 1-9M15 21c0-5-1-6-1-9M10 12c-1-3 0-5 2-8 2 3 3 5 2 8"/>',
@@ -613,7 +342,7 @@ function findItemMeta(id){
   return null;
 }
 
-render();
+cargarCatalogoDesdeSupabase().then(render);
 
 /* ================== MOBILE MENU ================== */
 const burger = document.getElementById('burger');
